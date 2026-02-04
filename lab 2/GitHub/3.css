@@ -1,0 +1,178 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: #24292f;
+}
+
+.header {
+  padding: 16px 40px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.nav-right {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.signup-btn {
+  padding: 6px 12px;
+  border: 1px solid #d0d7de;
+  background: white;
+  border-radius: 6px;
+}
+
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  max-width: 700px;
+  font-size: 10px;
+  margin: 0 auto 24px;
+  color: #57606a;
+}
+
+.hero-btn {
+  background: #24292f;
+  color: white;
+  font-size: 13px;
+  padding: 12px 28px;
+  border-radius: 6px;
+  border: none;
+}
+
+
+.pricing {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  padding-bottom: 80px;
+  flex-wrap: wrap;
+}
+
+.plan {
+  width: 280px;
+  border: 1px solid #d0d7de;
+  border-radius: 10px;
+  padding: 24px;
+  box-shadow: 0 8px 26px rgba(140, 149, 159, 0.314);
+}
+
+.plan h3 {
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #57606a;
+}
+
+.price {
+  font-size: 32px;
+  margin: 20px 0;
+}
+
+.price span {
+  font-size: 14px;
+}
+
+.plan ul {
+  list-style: none;
+  margin-top: 20px;
+}
+
+.plan li {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* BUTTONS */
+
+.plan-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  margin-top: 16px;
+  font-weight: 500;
+}
+
+.plan-btn.white {
+  background: white;
+  border: 1px solid #d0d7de;
+}
+
+.plan-btn.dark {
+  background: #24292f;
+  color: white;
+  border: none;
+}
+
+/* FEATURED */
+
+.featured {
+  border: 2px solid #0969da;
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  right: 20px;
+  background: #0969da;
+  color: white;
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 20px;
+}
+
+/* FOOTER */
+
+.footer {
+  text-align: center;
+  padding: 20px;
+  color: #57606a;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+  .nav-menu {
+    display: none;
+  }
+}
