@@ -1,0 +1,11 @@
+.home { padding: 24px; }
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  text-decoration: none;
+  color: black;
+}
+.btn:hover { background: #f6f6f6; }
