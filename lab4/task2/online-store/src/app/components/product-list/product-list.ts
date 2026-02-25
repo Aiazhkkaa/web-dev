@@ -1,18 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Product } from '../../models/product.model';
 import { ProductItemComponent } from '../product-item/product-item';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [ProductItemComponent],
+  imports: [CommonModule, ProductItemComponent],
   templateUrl: './product-list.html',
-  styleUrl: './product-list.css',
+  styleUrl: './product-list.css'
 })
 export class ProductListComponent {
   @Input() products: Product[] = [];
+  @Input() categoryName: string = '';
+  @Output() productDeleted = new EventEmitter<number>();
 
-  deleteProduct(id: number) {
-    this.products = this.products.filter(p => p.id !== id);
+  onDeleteProduct(productId: number): void {
+    this.productDeleted.emit(productId);
   }
 }

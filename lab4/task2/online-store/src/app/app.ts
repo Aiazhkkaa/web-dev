@@ -1,32 +1,35 @@
-import { Component } from '@angular/core';
-import { ProductService } from './data/products';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Category } from './models/category.model';
 import { Product } from './models/product.model';
+import { ProductService } from './data/products';
 import { ProductListComponent } from './components/product-list/product-list';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ProductListComponent],
+  imports: [CommonModule, ProductListComponent],
   templateUrl: './app.html',
-  styleUrl: './app.css',
+  styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit {
+  title = 'my-app';
   categories: Category[] = [];
-  allProducts: Product[] = [];
-  selectedCategoryId: number | null = null;
+  selectedCategory: Category | null = null;
+  products: Product[] = [];
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
     this.categories = this.productService.getCategories();
-    this.allProducts = this.productService.getProducts();
   }
 
-  selectCategory(id: number) {
-    this.selectedCategoryId = id;
+  selectCategory(category: Category): void {
+    this.selectedCategory = category;
+    this.products = this.productService.getProductsByCategory(category.id);
   }
 
-  get selectedProducts(): Product[] {
-    if (this.selectedCategoryId === null) return [];
-    return this.allProducts.filter(p => p.categoryId === this.selectedCategoryId);
+  onProductDeleted(productId: number): void {
+    this.products = this.products.filter(p => p.id !== productId);
   }
 }

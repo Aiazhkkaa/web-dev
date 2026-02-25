@@ -1,17 +1,31 @@
-<div class="container">
-  <h1>Online Store</h1>
+<div class="app-container">
+  <header class="app-header">
+    <h1>KaspiMarket</h1>
+    <p class="subtitle">Лучшие товары с <a href="https://kaspi.kz" target="_blank">Kaspi.kz</a></p>
+  </header>
 
-  <div class="categories">
-    @for (c of categories; track c.id) {
-      <button class="cat-btn" [class.active]="c.id === selectedCategoryId" (click)="selectCategory(c.id)">
-        {{ c.name }}
-      </button>
-    }
-  </div>
+  <nav class="category-nav">
+    <button
+      *ngFor="let category of categories"
+      class="category-btn"
+      [class.active]="selectedCategory?.id === category.id"
+      (click)="selectCategory(category)">
+      {{ category.name }}
+    </button>
+  </nav>
 
-  @if (selectedCategoryId === null) {
-    <p class="hint">Choose a category 👆</p>
-  } @else {
-    <app-product-list [products]="selectedProducts"></app-product-list>
-  }
+  <main class="main-content">
+    <div *ngIf="!selectedCategory" class="welcome-message">
+      <div class="welcome-icon">🛍️</div>
+      <h2>Добро пожаловать!</h2>
+      <p>Выберите категорию выше, чтобы увидеть товары.</p>
+    </div>
+
+    <app-product-list
+      *ngIf="selectedCategory"
+      [products]="products"
+      [categoryName]="selectedCategory.name"
+      (productDeleted)="onProductDeleted($event)">
+    </app-product-list>
+  </main>
 </div>
