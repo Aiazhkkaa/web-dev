@@ -1,144 +1,48 @@
+import { Injectable } from '@angular/core';
+import { Category } from '../models/category.model';
 import { Product } from '../models/product.model';
 
-export const PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: 'Монитор',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 19990,
-    rating: 4.6,
-    image: 'data:image/jpeg;base64,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',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+1+Img1',
-      'https://via.placeholder.com/400x300?text=Product+1+Img2',
-      'https://via.placeholder.com/400x300?text=Product+1+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 2,
-    name: 'Диван-офисный',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 299990,
-    rating: 4.2,
-    image: 'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRWv-C4Mmg5ezgYAqkUQzhYTpShqwd-wSlB6mds8nCdpGpH8gIJu4_7H09xDlL-Jp_W_8oF4UL-pRjboZCYCJsy5elR0NsHd5DZpCtix0pBYwr1&usqp=CAc',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+2+Img1',
-      'https://via.placeholder.com/400x300?text=Product+2+Img2',
-      'https://via.placeholder.com/400x300?text=Product+2+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 3,
-    name: 'Apple Airpods Pro',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 31000,
-    rating: 4.8,
-    image: 'https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcSsql9YedxK7-8YWvPV_JQK2XZe1Ge2-APKeced_dnx9LrgdVJVdoeMPjXapimRLDNbEay68md6xbBuIcUqgJmTHgOA4UI9-8b3EFBKgU1mJOE&usqp=CAc',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+3+Img1',
-      'https://via.placeholder.com/400x300?text=Product+3+Img2',
-      'https://via.placeholder.com/400x300?text=Product+3+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 4,
-    name: 'Аэрогриль',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 37000,
-    rating: 4.0,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/p6f/p24/114395643.png?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+4+Img1',
-      'https://via.placeholder.com/400x300?text=Product+4+Img2',
-      'https://via.placeholder.com/400x300?text=Product+4+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 5,
-    name: 'ТВ-тумба',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 24990,
-    rating: 4.5,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/h02/hda/67423804784670.jpg?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+5+Img1',
-      'https://via.placeholder.com/400x300?text=Product+5+Img2',
-      'https://via.placeholder.com/400x300?text=Product+5+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 6,
-    name: 'Вешалка',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 21990,
-    rating: 3.9,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/h60/he1/84668650291230.png?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+6+Img1',
-      'https://via.placeholder.com/400x300?text=Product+6+Img2',
-      'https://via.placeholder.com/400x300?text=Product+6+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 7,
-    name: 'Проектор',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 15990,
-    rating: 4.1,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/p24/pa2/60773776.jpg?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+7+Img1',
-      'https://via.placeholder.com/400x300?text=Product+7+Img2',
-      'https://via.placeholder.com/400x300?text=Product+7+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 8,
-    name: 'Баатарейка',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 1389,
-    rating: 4.7,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/hf0/he8/64043528060958.jpg?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+8+Img1',
-      'https://via.placeholder.com/400x300?text=Product+8+Img2',
-      'https://via.placeholder.com/400x300?text=Product+8+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 9,
-    name: 'Алиса',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 27990,
-    rating: 4.3,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/h9f/hfc/64362954719262.jpg?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+9+Img1',
-      'https://via.placeholder.com/400x300?text=Product+9+Img2',
-      'https://via.placeholder.com/400x300?text=Product+9+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-  {
-    id: 10,
-    name: 'Джостики',
-    description: 'Short description. 2–3 sentences. Simple and clear.',
-    price: 74990,
-    rating: 4.9,
-    image: 'https://resources.cdn-kaspi.kz/img/m/p/hcc/hf6/65102527954974.jpg?format=preview-large',
-    images: [
-      'https://via.placeholder.com/400x300?text=Product+10+Img1',
-      'https://via.placeholder.com/400x300?text=Product+10+Img2',
-      'https://via.placeholder.com/400x300?text=Product+10+Img3',
-    ],
-    link: 'PASTE_REAL_KASPI_LINK_HERE'
-  },
-];
+@Injectable({ providedIn: 'root' })
+export class ProductService {
+  private categories: Category[] = [
+    { id: 1, name: 'Smartphones' },
+    { id: 2, name: 'Laptops' },
+    { id: 3, name: 'Headphones' },
+    { id: 4, name: 'Tablets' },
+  ];
+
+
+  private products: Product[] = [
+    { id: 101, categoryId: 1, name: 'Samsung Galaxy A07', description: '128gb black', image: 'https://resources.cdn-kaspi.kz/img/m/p/p3d/pda/61291251.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/samsung-galaxy-a07-6-gb-128-gb-chernyi-144817763/?c=750000000', price: 68700, rating: 4.7, likes: 0 },
+    { id: 102, categoryId: 1, name: 'iPhone 17', description: '256gb orange', image: 'https://resources.cdn-kaspi.kz/img/m/p/p24/p88/64170090.png?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-iphone-17-pro-max-256gb-nanosim-esim-oranzhevyi-145468241/?c=750000000', price: 879990, rating: 4.6, likes: 0 },
+    { id: 103, categoryId: 1, name: 'iPhone 15', description: '128gb black', image: 'https://resources.cdn-kaspi.kz/img/m/p/h1d/hfc/86303745998878.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-iphone-15-128gb-nanosim-esim-chernyi-113137790/?c=750000000', price: 402990, rating: 4.5, likes: 0 },
+    { id: 104, categoryId: 1, name: 'Redmi A3', description: '64gb black', image: 'https://resources.cdn-kaspi.kz/img/m/p/h83/h08/86585118720030.png?format=preview-large', link: 'https://kaspi.kz/shop/p/redmi-a3x-3-gb-64-gb-chernyi-121654928/?c=750000000', price: 39990, rating: 4.8, likes: 0 },
+    { id: 105, categoryId: 1, name: 'iPhone 17', description: '256gb white', image: 'https://resources.cdn-kaspi.kz/img/m/p/p72/p55/64169948.png?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-iphone-17-pro-max-256gb-nanosim-esim-serebristyi-145468150/?c=750000000', price: 915990, rating: 4.4, likes: 0 },
+
+    { id: 201, categoryId: 2, name: 'Apple Macbook Air 13', description: 'SSD 256gb', image: 'https://resources.cdn-kaspi.kz/img/m/p/h06/h08/64213171568670.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-macbook-air-13-2020-13-3-8-gb-ssd-256-gb-macos-mgn63ru-a-101182724/?c=750000000', price: 499990, rating: 4.6, likes: 0 },
+    { id: 202, categoryId: 2, name: 'Lenovo IdeaPad 3', description: 'SSD 256gb', image: 'https://resources.cdn-kaspi.kz/img/m/p/h6f/hba/64231854538782.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/lenovo-ideapad-3-15-6-8-gb-ssd-256-gb-dos-15igl05-81wq00errk-102715483/?c=750000000', price: 173890, rating: 4.7, likes: 0 },
+    { id: 203, categoryId: 2, name: 'Apple MacBook Pro 16', description: 'SSD 512gb', image: 'https://resources.cdn-kaspi.kz/img/m/p/pc1/p7c/36863341.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-macbook-pro-16-2021-16-2-32-gb-ssd-512-gb-macos-z14v0008d-138158355/?c=750000000', price: 699990, rating: 4.4, likes: 0 },
+    { id: 204, categoryId: 2, name: 'Aser Aspire 3', description: 'SSD 256gb', image: 'https://resources.cdn-kaspi.kz/img/m/p/p24/pae/30100209.jpeg?format=preview-large', link: 'https://kaspi.kz/shop/p/acer-aspire-3-15-6-8-gb-ssd-256-gb-win-11-pro-a325-45-zn-n01si-03k--136300221/?c=750000000', price: 165990, rating: 4.8, likes: 0 },
+    { id: 205, categoryId: 2, name: 'Apple MacBook Air 13', description: 'SSD 256gb', image: 'https://resources.cdn-kaspi.kz/img/m/p/p3c/p38/16711028.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-macbook-air-13-2022-13-6-16-gb-ssd-256-gb-macos-mc7x4ru-a-132428983/?c=750000000', price: 459990, rating: 4.5, likes: 0 },
+
+    { id: 301, categoryId: 3, name: 'Headphones GERLAX GH-34', description: 'black', image: 'https://resources.cdn-kaspi.kz/img/m/p/h33/hfc/86037848064030.png?format=preview-large', link: 'https://kaspi.kz/shop/p/naushniki-gerlax-gh-34-chernyi-119492193/?c=750000000', price: 3990, rating: 4.5, likes: 0 },
+    { id: 302, categoryId: 3, name: 'Headphones Apple USB-C', description: 'white', image: 'https://resources.cdn-kaspi.kz/img/m/p/pa1/pc8/41468726.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/naushniki-apple-usb-c-myqy3zm-a-belyi-139440255/?c=750000000', price: 10460, rating: 4.6, likes: 0 },
+    { id: 303, categoryId: 3, name: 'Headphones Apple AirPods 3', description: 'white', image: 'https://resources.cdn-kaspi.kz/img/m/p/h31/hd7/64362668556318.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/naushniki-apple-airpods-3-with-lightning-charging-case-belyi-106667987/?c=750000000', price: 61990, rating: 4.3, likes: 0 },
+    { id: 304, categoryId: 3, name: 'Headphones CAT EAR STN-28', description: 'pink', image: 'https://resources.cdn-kaspi.kz/img/m/p/p21/pc1/10279674.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/naushniki-cat-ear-stn-28-rozovyi-101768468/?c=750000000', price: 10990, rating: 4.8, likes: 0 },
+    { id: 305, categoryId: 3, name: 'Headphones Marshall Major V', description: 'black', image: 'https://resources.cdn-kaspi.kz/img/m/p/pfe/pa6/95163535.jpeg?format=preview-large', link: 'https://kaspi.kz/shop/p/naushniki-marshall-major-v-chernyi-120483143/?c=750000000', price: 35990, rating: 4.7, likes: 0 },
+
+    { id: 401, categoryId: 4, name: 'Apple iPad A16', description: '128gb white', image: 'https://resources.cdn-kaspi.kz/img/m/p/pce/p96/37011919.png?format=preview-large', link: 'https://kaspi.kz/shop/p/apple-ipad-a16-11-2025-wi-fi-11-djuim-6-gb-128-gb-serebristyi-138199634/?c=750000000', price: 206990, rating: 4.6, likes: 0 },
+    { id: 402, categoryId: 4, name: 'Smart Product 7C', description: '128gb for kids', image: 'https://resources.cdn-kaspi.kz/img/m/p/h7f/hf8/85479045136414.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/smart-product-9901-7c-7-kids-tablet-7-djuim-4-gb-128-gb-sinii-117587880/?c=750000000', price: 25990, rating: 4.7, likes: 0 },
+    { id: 403, categoryId: 4, name: 'Xiaomi Redmi Pad 2', description: '256gb', image: 'https://resources.cdn-kaspi.kz/img/m/p/pa0/pb1/81440010.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/airstar-g3000-pluse-10-1-djuim-16-gb-512-gb-chernyi-128606600/?c=750000000', price: 129990, rating: 4.4, likes: 0 },
+    { id: 404, categoryId: 4, name: 'Huawei Matepad 11.5', description: '256gb white', image: 'https://resources.cdn-kaspi.kz/img/m/p/p7f/p08/65766347.png?format=preview-large', link: 'https://kaspi.kz/shop/p/huawei-matepad-11-5-2025-papermatte-11-5-djuim-8-gb-256-gb-fioletovyi-podarok-145939369/?c=750000000', price: 229990, rating: 4.8, likes: 0 },
+    { id: 405, categoryId: 4, name: 'Huawei MatePad SE', description: '128gb grey', image: 'https://resources.cdn-kaspi.kz/img/m/p/hc5/h60/86746842595358.jpg?format=preview-large', link: 'https://kaspi.kz/shop/p/huawei-matepad-se-ags6-w09-11-djuim-6-gb-128-gb-seryi-122142537/?c=750000000', price: 79990, rating: 4.5, likes: 0 },
+  ];
+
+  getCategories(): Category[] {
+    return this.categories;
+  }
+
+  getProducts(): Product[] {
+    return this.products;
+  }
+}

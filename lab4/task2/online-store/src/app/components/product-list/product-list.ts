@@ -1,17 +1,18 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { PRODUCTS } from '../../data/products';
+import { Component, Input } from '@angular/core';
 import { Product } from '../../models/product.model';
-import { ProductCardComponent } from '../product-card/product-card';
+import { ProductItemComponent } from '../product-item/product-item';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, ProductCardComponent],
+  imports: [ProductItemComponent],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductListComponent {
-  products: Product[] = PRODUCTS;
-  trackById = (index: number, p: Product) => p.id;
+  @Input() products: Product[] = [];
+
+  deleteProduct(id: number) {
+    this.products = this.products.filter(p => p.id !== id);
+  }
 }
