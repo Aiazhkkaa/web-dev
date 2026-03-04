@@ -9,5 +9,5 @@ import { ProductListComponent } from './components/product-list/product-list';
   styleUrl: './app.css'
 })
 export class App {
-  title = 'my-app';
+  title = 'online-store';
 }

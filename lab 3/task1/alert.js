@@ -5,9 +5,9 @@ alert("I'm JavaScript!");
 alert('Hello'); alert('World');
 
 //3
-let admin, name; 
-name = "John";
-admin = name;
+let admin, name0; 
+name0 = "John";
+admin = name0;
 alert( admin ); 
 
 //4
@@ -16,7 +16,7 @@ let currentUserName = "John";
 
 //5
 const birthday = '18.04.1982';
-const age = someCode(birthday);
+const age0 = someCode(birthday);
 
 //6
 let name1 = "Ilya";

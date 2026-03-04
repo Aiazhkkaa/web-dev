@@ -143,7 +143,7 @@ export class ProductListComponent {
       name: "Смартфон Huawei Mate XT Ultimate 16 ГБ/1024 ГБ красный + подарок",
       description: "Huawei Mate XT Ultimate (16/1024 ГБ, красный) — революционный складной смартфон-«трикладушка» с 10.2-дюймовым OLED-экраном (2232x3184), работающий на Kirin 9010. Устройство предлагает премиальный дизайн с кованой текстурой, камеру 50 Мп с переменной диафрагмой, батарею 5600 мАч (66 Вт) и гибкие режимы использования (один/два/три экрана). ",
       price: 549990,
-      rating: 0.0,
+      rating: 4.0,
       image: "https://resources.cdn-kaspi.kz/img/m/p/pd8/p7f/42733335.jpg?format=gallery-medium",
       images: [
         "https://resources.cdn-kaspi.kz/img/m/p/p2c/p80/42733338.jpg?format=gallery-medium",

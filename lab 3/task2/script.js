@@ -9,7 +9,10 @@ form.addEventListener('submit', function (event) {
     if (taskText === '') {
         return;
     }
-
+    if(taskText.length<3){
+        alert("no")
+        return
+    }
     addTodoItem(taskText);
     input.value = '';
 });
