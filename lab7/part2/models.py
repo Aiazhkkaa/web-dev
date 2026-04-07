@@ -14,7 +14,6 @@ class LibraryItem:
         return f"{self.title} has been returned."
 
     def get_details(self):
-        """This method will be overridden by children."""
         return f"Item: {self.title} ({self.year})"
 
     def __str__(self):
@@ -39,3 +38,9 @@ class Magazine(LibraryItem):
 
     def get_details(self):
         return f"Magazine: {self.title} (Issue #{self.issue_number}), published in {self.year}."
+class newpaper(LibraryItem):
+    def __init__(self,title,year,pep):
+        super().__init__(title,year)
+        self.pep=pep  
+    def get_details(self):
+        return f'{pep} pepepepe'
